@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    private void Start()
+    public virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
