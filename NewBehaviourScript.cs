@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public GameObject projectile;
     public Transform shotPoint;
