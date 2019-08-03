@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     private Vector2 moveAmount;
+    public Image[] hearts;
+    public Sprite FullHeart;
+    public Sprite EmptyHeart;
 
 
     // Start is called before the first frame update
@@ -43,9 +47,38 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        UpdateHealthUI(health);
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    public void ChangeWeapon(Weapon WeaponToEquip)
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Weapon"));
+        Instantiate(WeaponToEquip, new Vector2(transform.position.x - 32, transform.position.y + 5), transform.rotation, transform);
+    }
+
+    public void UpdateHealthUI(int currentHealth)
+    {
+       for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i< currentHealth)
+            {
+                hearts[i].sprite = FullHeart;
+            } else
+            {
+                hearts[i].sprite = EmptyHeart;
+            }
+        }
+    }
+    public void Heal(int HealAmount)
+    {
+        if(health + HealAmount <= 5)
+        {
+            health += HealAmount;
+            UpdateHealthUI(health);
+        }
+        
     }
 }
