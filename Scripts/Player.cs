@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public Sprite FullHeart;
     public Sprite EmptyHeart;
     public Animator HurtAnim;
+    private SceneTransition sceneTransitions;
 
 
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sceneTransitions = FindObjectOfType<SceneTransition>();
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            sceneTransitions.LoadScene("Lose");
         }
     }
     public void ChangeWeapon(Weapon WeaponToEquip)

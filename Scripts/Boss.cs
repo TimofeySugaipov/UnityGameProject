@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour
     public int damage;
     public GameObject damageEffect;
     private Slider HealthBar;
+    private SceneTransition sceneTransitions;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Boss : MonoBehaviour
         HealthBar = FindObjectOfType<Slider>();
         HealthBar.maxValue = health;
         HealthBar.value = health;
+        sceneTransitions = FindObjectOfType<SceneTransition>();
     }
 
     // Update is called once per frame
@@ -38,6 +40,7 @@ public class Boss : MonoBehaviour
         {
             HealthBar.gameObject.SetActive(false);
             Destroy(gameObject);
+            sceneTransitions.LoadScene("Win");
         }
 
         if (health <= HalfHealth)
